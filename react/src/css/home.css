@@ -1,0 +1,28 @@
+.home-div {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .home-title {
+    font-family: "Noto Serif KR", serif;
+  }
+  
+  .serverImage {
+    width: 500px;
+    height: auto;
+    border-radius: 40px;
+  }
+  
+  .myImage {
+    width: 300px;
+    height: auto;
+    border-radius: 40px;
+    position: absolute;
+    opacity: 0.75;
+    z-index: 1;
+  }
+  
