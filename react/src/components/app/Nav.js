@@ -1,26 +1,25 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import { Link } from "react-router-dom";
+import "../../css/navbar.css";
 
 function Nav() {
   const { auth, setAuth } = useContext(AuthContext);
 
   return (
-    <nav className="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+    <nav className="navbar navbar-expand-md navbar-dark bg-dark">
       <div className="container">
         <div
           className="navbar-collapse collapse justify-content-between"
           id="navbar-content"
         >
           <ul className="navbar-nav mr-auto">
-            {/* 메인 화면 */}
             <li className="nav-item">
               <Link className="nav-link" to="/">
                 <i className="fas fa-home"></i> Home
               </Link>
             </li>
 
-            {/* 게시판 */}
             <li className="nav-item dropdown">
               <div
                 className="nav-link dropdown-toggle"
