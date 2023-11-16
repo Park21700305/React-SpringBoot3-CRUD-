@@ -68,7 +68,7 @@ function Join() {
     };
 
     await axios
-      .post("http://localhost:8080/user/join", request)
+      .post("http://localhost:8080/user/signup", request)
       .then((response) => {
         console.log("[Join.js] join() success :D");
         console.log(response.data);
