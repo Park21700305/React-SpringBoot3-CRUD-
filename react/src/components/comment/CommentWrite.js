@@ -1,7 +1,8 @@
+
+
 import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import { HttpHeadersContext } from "../context/HttpHeadersProvider";
 
 function CommentWrite(props) {
@@ -20,9 +21,9 @@ function CommentWrite(props) {
 
   const createComment = async () => {
     const request = {
-      id: id,
-      content: content,
-      BoardSeq: seq,
+      id: id, // 로그인한 사용자의 아이디
+      content: content, // 댓글 내용
+      BoardSeq: seq, // 게시글 번호
     };
 
     await axios
