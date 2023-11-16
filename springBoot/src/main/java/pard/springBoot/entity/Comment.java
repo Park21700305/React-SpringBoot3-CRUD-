@@ -1,17 +1,43 @@
 package pard.springBoot.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import org.hibernate.sql.Update;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Comment {
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private Integer seq; // 댓글 고유 번호
-    private String id; // 댓글 작성자
-    private String content; // 댓글 내용
-    private Integer boardSeq; // 게시글 번호
-    private String createdAt; // 댓글 생성 일자
-    private Integer del; // 삭제 여부
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer seq;
+    private String content;
+    @CreatedDate
+    private String createdAt;
+    private Integer del;
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "boardSeq")
+    private Board board;
+
+    @Builder
+    public Comment(String content, Integer del, User user, Board board) {
+        this.content = content;
+        this.del = del;
+        this.user = user;
+        this.board = board;
+    }
+
+    public void update(String content) {
+        this.content = content;
+    }
+
 }

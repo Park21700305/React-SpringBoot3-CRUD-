@@ -1,24 +1,46 @@
 package pard.springBoot.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.util.List;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Board {
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private Integer seq; // 게시글 고유 번호
-    private String id; // 게시글 작성자
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer seq;
+    private String title;
+    private String content;
+    private String createdAt;
+    private Integer del;
+    private Integer readCount;
 
-    private Integer ref; // 게시글 그룹 번호
-    private Integer step; // 게시글 그룹 내 순서
-    private Integer depth; // 게시글 그룹 내 계층
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
 
-    private String title; // 게시글 제목
-    private String content; // 게시글 내용
-    private String createdAt; // 게시글 생성 일자
+    @OneToMany(mappedBy = "board")
+    private List<Comment> comments;
 
-    private Integer del; // 삭제 여부
-    private Integer readCount; // 조회수
+    @Builder
+    public Board(String title, String content, String createdAt, Integer del, Integer readCount, User user) {
+        this.title = title;
+        this.content = content;
+        this.createdAt = createdAt;
+        this.del = del;
+        this.readCount = readCount;
+        this.user = user;
+    }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
 }
