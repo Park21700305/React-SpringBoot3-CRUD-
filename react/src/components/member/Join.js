@@ -36,7 +36,7 @@ function Join() {
   /* 아이디 중복 체크 */
   const checkIdDuplicate = async () => {
     await axios
-      .get("http://localhost:8080/user", { params: { id: id } })
+      .get("http://localhost:8080/api/user", { params: { id: id } })
       .then((response) => {
         console.log("[Join.js] checkIdDuplicate() success :D");
         console.log(response.data);
