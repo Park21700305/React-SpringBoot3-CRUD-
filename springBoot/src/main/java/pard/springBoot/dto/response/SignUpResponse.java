@@ -1,4 +1,7 @@
 package pard.springBoot.dto.response;
 
-public class SignUpResponse {
+public record SignUpResponse(
+        String id,
+        String name,
+        String email) {
 }
