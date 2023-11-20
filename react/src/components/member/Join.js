@@ -60,8 +60,7 @@ function Join() {
   const join = async () => {
     const request = {
       id: id,
-      name,
-      name,
+      name: name,
       pwd: pwd,
       checkPwd: checkPwd,
       email: email,

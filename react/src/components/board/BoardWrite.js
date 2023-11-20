@@ -1,3 +1,75 @@
+/*
+URL: /board
+
+Method: POST
+
+Headers:
+  Required:
+    Content-Type: application/json - 요청 본문이 JSON 형식임을 명시
+    Authorization: Bearer [access_token] - 사용자 인증을 위한 JWT 또는 다른 토큰 (해당되는 경우)
+
+Request Body:
+
+id=[string] - 게시글을 작성하는 사용자의 ID
+title=[string] - 게시글의 제목
+content=[string] - 게시글의 내용
+Success Response:
+
+Code: 200 OK
+Content:
+json
+Copy code
+{
+  "seq": [integer], // 생성된 게시글의 고유 시퀀스 번호
+  "message": "새로운 게시글을 성공적으로 등록했습니다"
+}
+Error Response:
+
+Code: 400 BAD REQUEST
+Content:
+json
+Copy code
+{
+  "error": "Invalid input data"
+}
+OR
+Code: 401 UNAUTHORIZED
+Content:
+json
+Copy code
+{
+  "error": "Authentication required"
+}
+OR
+Code: 500 INTERNAL SERVER ERROR
+Content:
+json
+Copy code
+{
+  "error": "Server error"
+}
+Sample Call:
+
+javascript
+Copy code
+axios.post('http://localhost:8080/board', {
+  id: 'user123',
+  title: 'New Post Title',
+  content: 'This is the content of the new post.'
+}, {
+  headers: { 
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer access_token'
+  }
+});
+Notes:
+
+사용자 인증이 필요할 수 있으며, 인증되지 않은 사용자는 게시글 작성이 불가능합니다.
+게시글 등록에 성공하면 서버는 생성된 게시글의 고유 번호(seq)를 반환합니다.
+클라이언트는 반환된 seq를 사용하여 사용자를 게시글 상세 페이지로 리디렉션할 수 있습니다.
+
+ */
+
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
