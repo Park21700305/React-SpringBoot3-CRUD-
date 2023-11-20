@@ -1,14 +1,10 @@
 package pard.springBoot.dto.request;
 
-import lombok.Data;
-
-@Data
-public class SignUpRequest {
-
-    private String id;
-    private String name;
-    private String pwd;
-    private String checkPwd;
-    private String email;
-
+public record SignUpRequest(
+        String id,
+        String name,
+        String pwd,
+        String checkPwd,
+        String email) {
 }
+
